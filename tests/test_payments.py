@@ -20,3 +20,9 @@ def test_create_payment(payments_service):
     assert payment["status"] == "COMPLETED"
     print(f"✅ Payment created: {payment['id']}")
 
+@pytest.mark.api
+def test_get_list_of_payments(payments_service):
+
+    response = payments_service.get_payments()
+    assert response.status_code == 200
+    print(response.json())

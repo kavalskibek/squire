@@ -19,3 +19,7 @@ class PaymentService:  # ← ДОБАВИЛ "s"!
         }
         # ← УБРАЛ /payments — PAYMENTS уже содержит /v2/payments
         return self.client.post(PAYMENTS, json_data=payload)
+
+
+    def get_payments(self ):
+        return self.client.get(PAYMENTS)
