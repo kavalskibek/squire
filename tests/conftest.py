@@ -1,5 +1,7 @@
 import os
 import sys
+from ctypes import pythonapi
+
 import pytest
 
 # Абсолютный путь до корня проекта
@@ -28,3 +30,9 @@ def square_client():
 def payments_service(square_client):
     """Фикстура бизнес-логики"""
     return PaymentService(square_client)
+
+@pytest.fixture
+def created_payment_id(payments_service):
+    response = payments_service.create_payment(amount=100)
+    assert response.status_code == 200
+    return response.json()["payment"]["id"]

@@ -23,3 +23,31 @@ class PaymentService:  # ← ДОБАВИЛ "s"!
 
     def get_payments(self ):
         return self.client.get(PAYMENTS)
+
+
+    def cancel_payment(self, idempotency_key: str = None):
+
+        if idempotency_key is None:
+            idempotency_key = str(uuid.uuid4())
+        payload = {'idempotency_key': idempotency_key}
+
+        endpoint = f'{PAYMENTS}/{payment_id}/cancel'
+        return self.client.post(endpoint, json_data=payload)
+
+
+    def get_payment_by_id(self, payment_id: str):
+
+        endpoint = f'{PAYMENTS}/{payment_id}'
+        return self.client.get(endpoint)
+
+
+    def create_refund(self, payment_id: str,  amount: int, currency: str ='USD'  ):
+
+        payload = {
+            "idempotency_key": str(uuid.uuid4()),
+            'amount_money': amount,
+            'currency': currency,
+            'payment_id': payment_id
+        }
+
+        return self.client.post(REFUNDS, json_data=payload)
