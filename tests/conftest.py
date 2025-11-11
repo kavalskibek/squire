@@ -13,7 +13,7 @@ if ROOT_DIR not in sys.path:
 
 # Теперь можно импортировать из src
 from src.api.square_client import SquareClient
-from src.api.payments_service import PaymentService
+from src.api.payments_service import PaymentsService
 
 # @pytest.fixture(scope="session")
 # def square_client():
@@ -29,7 +29,7 @@ def square_client():
 @pytest.fixture
 def payments_service(square_client):
     """Фикстура бизнес-логики"""
-    return PaymentService(square_client)
+    return PaymentsService(square_client)
 
 @pytest.fixture
 def created_payment_id(payments_service):
