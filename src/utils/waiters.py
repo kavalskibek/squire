@@ -1,7 +1,7 @@
 import time
 
-class Waiter:
 
+class Waiter:
     def __init__(self, timeout=10, interval=0.5):
         """
         :param timeout: Максимальное время ожидания (в секундах)
@@ -9,7 +9,6 @@ class Waiter:
         """
         self.timeout = timeout
         self.interval = interval
-
 
     def until(self, condition, message="Condition not met in time"):
         """
@@ -24,8 +23,7 @@ class Waiter:
                 if result:
                     return result
             except Exception:
-                # игнорируем временные ошибки (например, элемент не найден)
-                pass
+                pass  # игнорируем временные ошибки
 
             if time.time() - start >= self.timeout:
                 raise TimeoutError(message)
@@ -50,3 +48,9 @@ class Waiter:
                 raise TimeoutError(message)
 
             time.sleep(self.interval)
+
+
+# ✅ Функция должна быть вне класса
+def wait_for(condition, timeout=10, interval=0.5, message="Condition not met in time"):
+    waiter = Waiter(timeout=timeout, interval=interval)
+    return waiter.until(condition, message)
