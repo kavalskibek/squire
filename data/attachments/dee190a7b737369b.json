@@ -1,0 +1,1 @@
+{"errors": [{"code": "CURRENCY_MISMATCH","detail": "Payment currency USD does not match refund currency EUR","field": "amount_money.currency","category": "PAYMENT_METHOD_ERROR"}]}

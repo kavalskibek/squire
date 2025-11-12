@@ -1,0 +1,12 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"
+    Проверяем, что возврат создаётся успешно для разных сумм и валют.
+    ","3064","test_refund_payment[50-USD]","tests","2025-11-12","passed","2025-11-12","","test_refund_payment","",""
+"Создание платежа и ожидание появления в списке","3059","test_create_payment_and_wait_in_list","tests","2025-11-12","passed","2025-11-12","","test_payments","",""
+"
+    Проверяем, что возврат создаётся успешно для разных сумм и валют.
+    ","2179","test_refund_payment[100-USD]","tests","2025-11-12","passed","2025-11-12","","test_refund_payment","",""
+"
+    Проверяем, что возврат создаётся успешно для разных сумм и валют.
+    ","803","test_refund_payment[150-EUR]","tests","2025-11-12","passed","2025-11-12","","test_refund_payment","",""
+"","263","test_get_locations","tests","2025-11-12","passed","2025-11-12","","test_payments","",""
