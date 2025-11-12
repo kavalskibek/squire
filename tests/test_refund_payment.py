@@ -28,8 +28,6 @@ def test_refund_payment(payments_service, amount, currency):
     with allure.step("2️⃣ Refund payment by ID"):
         refund = payments_service.create_refund(payment_id, amount=amount, currency=currency)
         allure.attach(refund.text, "Refund response", allure.attachment_type.JSON)
-
-        # Проверяем, что запрос прошёл или завершён с ошибкой статуса
         assert refund.status_code in [200, 400], f"Unexpected status: {refund.status_code}"
 
     if refund.status_code == 200:
@@ -49,15 +47,9 @@ def test_refund_payment(payments_service, amount, currency):
             allure.attach(str(refund_data), "Refund Data", allure.attachment_type.JSON)
             print(f"✅ Refund {refund_id} created successfully with status {status}")
 
-
     elif refund.status_code == 400:
-
         with allure.step("⚠️ Refund failed — invalid request"):
-
             assert any(
-
                 err_code in refund.text
-
                 for err_code in ["INVALID_PAYMENT_STATUS", "CURRENCY_MISMATCH"]
-
             ), f"Unexpected error response: {refund.text}"

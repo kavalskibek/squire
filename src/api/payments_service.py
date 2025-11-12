@@ -46,3 +46,7 @@ class PaymentsService:
     def get_refund_by_id(self, refund_id: str):
         endpoint = f"{REFUNDS}/{refund_id}"
         return self.client.get(endpoint)
+
+
+    # def cancel_payment(self, payment_id: str):
+

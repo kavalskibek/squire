@@ -1,4 +1,4 @@
-name: API Tests
+name: API Tests with Allure Report
 
 on:
   push:
@@ -28,18 +28,22 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Run pytest
-        run: |
-          pytest -v -s --maxfail=1 --disable-warnings
+      - name: Run pytest and collect Allure results
+        run: pytest -v -s --disable-warnings --alluredir=allure-results
 
-      - name: Generate Allure results
+      # 🔹 Шаг 1: генерируем Allure отчёт
+      - name: Generate Allure report
         if: always()
-        run: |
-          pytest --alluredir=allure-results
-
-      - name: Upload Allure report artifact
-        if: always()
-        uses: actions/upload-artifact@v4
+        uses: simple-elf/allure-report-action@v1.7
         with:
-          name: allure-results
-          path: allure-results
+          allure_results: allure-results
+          allure_report: allure-report
+          allure_history: allure-history
+
+      # 🔹 Шаг 2: публикуем отчёт на GitHub Pages
+      - name: Deploy Allure report to GitHub Pages
+        if: always()
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: allure-report
